@@ -1,0 +1,41 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Initialize the terraform') {
+
+            steps {
+
+                // initialize teh terraform
+
+                sh 'terraform init'
+
+            }
+
+        }
+
+        stage('Plan Terraform Changes') {
+
+            steps {
+
+                // Generate and show an execution plan
+
+                sh 'terraform plan -out=tfplan'
+
+            }
+
+        }
+
+        stage('Apply Terraform Changes') {
+
+            steps {
+
+                // Apply the changes defined in the execution plan
+
+                sh 'terraform apply -auto-approve tfplan'
+
+            }
+
+        }
